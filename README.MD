@@ -11,7 +11,6 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-em%20desenvolvimento-orange?style=flat-square)]()
 [![Version](https://img.shields.io/badge/version-0.1.0-blue?style=flat-square)]()
-[![Python](https://img.shields.io/badge/Python-3.11+-green?style=flat-square)](https://www.python.org/)
 
 A command-line tool for lexiometric analysis of text files. Built with Python, focused on simplicity and statistical precision.
 
