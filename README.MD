@@ -18,8 +18,7 @@ A command-line tool for lexiometric analysis of text files. Built with Python, f
 
 * **Word Frequency** — Analyze the most frequent words in a text.
 * **Vocabulary & Unique Words** — Measure lexical richness and unique word count.
-* **Text Comparison** — Compare vocabulary and patterns across multiple texts.
-* **Export Report** — Save analysis results to a file.
+* **Top Words** — Displays the ranking of the most frequent words in the text.
 
 ---
 
