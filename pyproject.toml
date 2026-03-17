@@ -1,0 +1,17 @@
+[project]
+name = "Lexio"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "typer",
+    "rich",
+    "pymupdf",
+    "validators",
+]
+
+[project.scripts]
+lexio = "src.main:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+namespaces = true
