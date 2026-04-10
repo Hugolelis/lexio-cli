@@ -1,83 +1,77 @@
-```
- ██╗     ███████╗██╗  ██╗██╗ ██████╗ 
- ██║     ██╔════╝╚██╗██╔╝██║██╔═══██╗
- ██║     █████╗   ╚███╔╝ ██║██║   ██║
- ██║     ██╔══╝   ██╔██╗ ██║██║   ██║
- ███████╗███████╗██╔╝ ██╗██║╚██████╔╝
- ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝ 
-```
+# Lexio
 
-# 📊 Lexio
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-in%20progress-orange?style=flat-square)]()
-[![Version](https://img.shields.io/badge/version-0.1.0-blue?style=flat-square)]()
+<div align="left">
+
+[![License](https://img.shields.io/badge/License-MIT-1a1a2e?style=for-the-badge&logoColor=white)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-In%20Progress-1a1a2e?style=for-the-badge&logoColor=white)]()
+[![Version](https://img.shields.io/badge/Version-0.1.0-1a1a2e?style=for-the-badge&logoColor=white)]()
+
+</div>
 
 A command-line tool for lexiometric analysis of text files. Built with Python, focused on simplicity and statistical precision.
 
-## ✨ Features
+---
 
-* **Word Frequency** — Analyze the most frequent words in a text.
-* **Vocabulary & Unique Words** — Measure lexical richness and unique word count.
-* **Top Words** — Displays the ranking of the most frequent words in the text.
+## Features
+
+- **Word Frequency** — Analyze the most frequent words in a text.
+- **Vocabulary & Unique Words** — Measure lexical richness and unique word count.
+- **Top Words** — Displays the ranking of the most frequent words in the text.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-* **Language:** [Python 3.11+](https://www.python.org/)
-* **CLI:** [Typer](https://typer.tiangolo.com/) — modern CLI framework based on type hints
-* **Terminal UI:** [Rich](https://rich.readthedocs.io/) — beautiful terminal output with tables and charts
+![Python](https://img.shields.io/badge/Python-1a1a2e?style=for-the-badge&logo=python&logoColor=white)
+![Typer](https://img.shields.io/badge/Typer-1a1a2e?style=for-the-badge&logo=fastapi&logoColor=white)
+![Rich](https://img.shields.io/badge/Rich-1a1a2e?style=for-the-badge&logo=python&logoColor=white)
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 lexio/
 ├── src/
 │   ├── cli/
-│   │   └── commands.py       # CLI commands and argument definitions
+│   │   └── commands.py
 │   ├── services/
-│   │   └── analyzer.py       # Core analysis logic
+│   │   └── analyzer.py
 │   ├── helpers/
-│   │   └── errors.py         # Custom error handling
-│   └── main.py               # Entrypoint
-├── pyproject.toml            # Project manifest and dependencies
+│   │   └── errors.py
+│   └── main.py
+├── pyproject.toml
 └── README.md
 ```
 
 ---
 
-## ⚙️ Running
+## Running
 
-#### 1. Clone the Repository
-
+**1. Clone the repository**
 ```bash
 git clone https://github.com/Hugolelis/lexio.git
 cd lexio
 ```
 
-#### 2. Create and activate virtual environment
-
+**2. Create and activate virtual environment**
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-#### 3. Install Dependencies
-
+**3. Install dependencies**
 ```bash
 pip install -e .
 ```
 
-#### 4. Run
-
+**4. Run**
 ```bash
-
+# comando aqui quando disponível
 ```
 
 ---
 
-## 📄 License
+## License
 
-This project is licensed under the **MIT** License. See the [LICENSE](LICENSE) file for details.
+Licensed under the **MIT** License. See [LICENSE](LICENSE) for details.
