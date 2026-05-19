@@ -69,18 +69,18 @@ pip install -e .
 **3. Run**
 ```bash
 # Full analysis
-lexio analyze sample.txt
-lexio analyze document.pdf
-lexio analyze report.docx
+lexio analyze <file.txt>
+lexio analyze <file.pdf>
+lexio analyze <file.docx>
 
 # Top words
-lexio top-words sample.txt -n 20
+lexio top-words <file> -n 20
 
 # Vocabulary
-lexio vocabulary sample.txt -s freq
+lexio vocabulary <file> -s freq
 
 # Word frequency
-lexio freq sample.txt programming
+lexio freq <file> <word>
 
 # Stopwords
 lexio stopwords
