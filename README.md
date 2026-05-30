@@ -3,109 +3,202 @@
 <div align="left">
 
 [![License](https://img.shields.io/badge/License-MIT-1a1a2e?style=for-the-badge&logoColor=white)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Complete-1a1a2e?style=for-the-badge&logoColor=white)]()
+[![Python](https://img.shields.io/badge/Python-3.11+-1a1a2e?style=for-the-badge&logo=python&logoColor=white)]()
 [![Version](https://img.shields.io/badge/Version-0.1.0-1a1a2e?style=for-the-badge&logoColor=white)]()
 
 </div>
 
-A command-line tool for lexiometric analysis of text files. Built with Python, focused on simplicity and statistical precision.
+> **Lexio** is a command-line tool for lexiometric analysis of text documents. It extracts statistical insights from `.txt`, `.pdf`, and `.docx` files — including word frequency, vocabulary richness, and readability metrics — with automatic stopword filtering and configurable analysis parameters.
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Commands](#commands)
+- [Configuration](#configuration)
+- [Architecture](#architecture)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
 ## Features
 
-- **Multi-Format Support** — Analyze `.txt`, `.pdf`, and `.docx` files.
-- **Full Analysis** — Complete lexiometric analysis with statistics (total words, unique words, sentences, paragraphs, avg word length, type-token ratio, hapax/dis legomena).
-- **Word Frequency** — Check the frequency of any specific word in a text.
-- **Vocabulary & Unique Words** — Display all unique words, sorted alphabetically or by frequency.
-- **Top Words** — Displays the ranking of the most frequent words in the text with visual bars.
-- **Smart Stopword Filtering** — Automatically filters 300+ stopwords and connectives in English and Portuguese.
+| Capability | Description |
+|---|---|
+| **Multi-format** | Analyze `.txt`, `.pdf`, and `.docx` files |
+| **Lexiometric stats** | Total words, unique words, sentences, paragraphs |
+| **Readability metrics** | Type-token ratio, hapax/dis legomena, average word length |
+| **Word frequency** | Rank top words with visual bar charts |
+| **Vocabulary** | List all unique words alphabetically or by frequency |
+| **Word search** | Check exact frequency of any word |
+| **Stopword filtering** | Built-in 300+ stopwords for English and Portuguese |
+| **Custom stopwords** | User-defined word filters via `~/.lexio/stopwords.txt` |
+| **Minimum length** | Filter out short words with `--min-length` |
 
 ---
 
-## Tech Stack
+## Installation
 
-![Python](https://img.shields.io/badge/Python-1a1a2e?style=for-the-badge&logo=python&logoColor=white)
-![Typer](https://img.shields.io/badge/Typer-1a1a2e?style=for-the-badge&logo=fastapi&logoColor=white)
-![Rich](https://img.shields.io/badge/Rich-1a1a2e?style=for-the-badge&logo=python&logoColor=white)
-![PyMuPDF](https://img.shields.io/badge/PyMuPDF-1a1a2e?style=for-the-badge&logoColor=white)
-![python-docx](https://img.shields.io/badge/python--docx-1a1a2e?style=for-the-badge&logoColor=white)
-
----
-
-## Project Structure
-
-```text
-lexio/
-├── src/
-│   ├── cli/
-│   │   └── commands.py
-│   ├── services/
-│   │   ├── analyzer.py
-│   │   └── readers.py
-│   ├── helpers/
-│   │   ├── errors.py
-│   │   └── stopwords.py
-│   └── main.py
-├── pyproject.toml
-└── README.md
-```
-
----
-
-## Running
-
-**1. Clone the repository**
 ```bash
+# Clone the repository
 git clone https://github.com/Hugolelis/lexio.git
 cd lexio
-```
 
-**2. Install dependencies**
-```bash
+# Install dependencies
 pip install -e .
 ```
 
-**3. Run**
+---
+
+## Usage
+
+### Basic analysis
+
 ```bash
-# Full analysis
-lexio analyze <file.txt>
-lexio analyze <file.pdf>
-lexio analyze <file.docx>
+lexio analyze sample.txt
+```
 
-# Top words
-lexio top-words <file> -n 20
+Output includes statistics and a ranked list of the most frequent words:
 
-# Vocabulary
-lexio vocabulary <file> -s freq
+```
+╭───────────────────────╮
+│ Lexiometric Analysis  │
+│ File: sample.txt      │
+╰───────────────────────╯
 
-# Word frequency
-lexio freq <file> <word>
+         Statistics
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Metric          ┃  Value ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ Total Words     │    859 │
+│ Unique Words    │    325 │
+│ Sentences       │     72 │
+│ Paragraphs      │     35 │
+│ Avg Word Length │   3.99 │
+│ Type-Token Ratio│ 0.3783 │
+│ Hapax Legomena  │    204 │
+│ Dis Legomena    │     47 │
+└─────────────────┴────────┘
+```
 
-# Stopwords
-lexio stopwords
-lexio stopwords --lang en
-lexio stopwords --lang pt
+### Top words
+
+```bash
+lexio top-words document.pdf -n 20
+```
+
+### Vocabulary
+
+```bash
+lexio vocabulary report.docx
+lexio vocabulary sample.txt -s freq        # sort by frequency
+lexio vocabulary sample.txt --min-length 4 # only words >= 4 chars
+```
+
+### Word frequency lookup
+
+```bash
+lexio freq sample.txt programming
+```
+
+### Stopword management
+
+```bash
+lexio stopwords                           # list all stopwords
+lexio stopwords --lang en                 # english only
+lexio stopwords --lang pt                 # portuguese only
+```
+
+### Including stopwords
+
+By default, stopwords are filtered out. Include them with `--include-stopwords`:
+
+```bash
+lexio analyze sample.txt --include-stopwords
 ```
 
 ---
 
-## Custom Stopwords
+## Commands
 
-Create `~/.lexio/stopwords.txt` to add your own words to filter:
+| Command | Description | Aliases |
+|---|---|---|
+| `analyze` | Full lexiometric analysis with stats and top words | — |
+| `top-words` | Rank most frequent words | — |
+| `vocabulary` | List all unique words | — |
+| `freq` | Check frequency of a specific word | — |
+| `stopwords` | List all active stopwords | — |
+| `version` | Show version | — |
 
-```text
-# Custom stopwords for Lexio
-# One word per line. Lines starting with # are ignored.
+### Global options
+
+| Option | Description | Default |
+|---|---|---|
+| `--include-stopwords` | Include stopwords in results | `False` |
+| `--min-length`, `-m` | Minimum word length to include | `3` |
+| `--top`, `-t` | Number of top words to display | `10` |
+| `--count`, `-n` | Number of words in top-words output | `10` |
+| `--sort`, `-s` | Sort vocabulary by `alpha` or `freq` | `alpha` |
+| `--lang`, `-l` | Filter stopwords by language | `all` |
+
+---
+
+## Configuration
+
+### Custom stopwords
+
+Create `~/.lexio/stopwords.txt` to add domain-specific words to filter:
+
+```
+# Custom stopwords
 algorithm
 framework
-library
+repository
 ```
 
-These words will be automatically combined with the built-in stopwords.
+The custom list merges with the built-in 300+ stopwords automatically.
+
+---
+
+## Architecture
+
+```
+src/
+├── main.py                 # Entry point
+├── cli/
+│   └── commands.py         # CLI commands (Typer)
+├── services/
+│   ├── analyzer.py         # Core analysis engine
+│   └── readers.py          # File readers (.txt, .pdf, .docx)
+└── helpers/
+    ├── errors.py           # Custom exceptions
+    └── stopwords.py        # Stopword lists and filtering
+```
+
+The pipeline follows a clean separation of concerns:
+
+1. **Reader** — detects file extension and extracts raw text with paragraph count
+2. **Analyzer** — tokenizes, counts, and computes statistical metrics
+3. **CLI** — presents results using Rich tables and panels
+
+---
+
+## Contributing
+
+Contributions are welcome! To get started:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-feature`)
+3. Commit your changes (`git commit -am 'Add my feature'`)
+4. Push to the branch (`git push origin feature/my-feature`)
+5. Open a Pull Request
 
 ---
 
 ## License
 
-Licensed under the **MIT** License. See [LICENSE](LICENSE) for details.
+Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
