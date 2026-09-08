@@ -10,59 +10,37 @@
 
 > **Lexio** is a command-line tool for lexiometric analysis of text documents. It extracts statistical insights from `.txt`, `.pdf`, and `.docx` files — including word frequency, vocabulary richness, and readability metrics — with automatic stopword filtering and configurable analysis parameters.
 
----
+<details>
+<summary><strong>Table of Contents</strong></summary>
 
-## Table of Contents
-
+- [About](#about)
+- [Demo](#demo)
 - [Features](#features)
-- [Installation](#installation)
+- [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Commands](#commands)
 - [Configuration](#configuration)
-- [Architecture](#architecture)
-- [Contributing](#contributing)
+- [Architecture & Design Decisions](#architecture--design-decisions)
 - [License](#license)
+- [Author](#author)
+
+</details>
 
 ---
 
-## Features
+## About
 
-| Capability | Description |
-|---|---|
-| **Multi-format** | Analyze `.txt`, `.pdf`, and `.docx` files |
-| **Lexiometric stats** | Total words, unique words, sentences, paragraphs |
-| **Readability metrics** | Type-token ratio, hapax/dis legomena, average word length |
-| **Word frequency** | Rank top words with visual bar charts |
-| **Vocabulary** | List all unique words alphabetically or by frequency |
-| **Word search** | Check exact frequency of any word |
-| **Stopword filtering** | Built-in 300+ stopwords for English and Portuguese |
-| **Custom stopwords** | User-defined word filters via `~/.lexio/stopwords.txt` |
-| **Minimum length** | Filter out short words with `--min-length` |
+Manually eyeballing a text for word frequency or vocabulary richness doesn't scale past a page. Lexio turns that into a single command across `.txt`, `.pdf`, and `.docx` files, computing the same lexicometric measures linguists use by hand — type-token ratio, hapax/dis legomena, word frequency — with stopword filtering built in so the numbers aren't dominated by "the", "and", "de", "que".
+
+<!-- Adjust to your actual motivation — draft based on the feature list. -->
 
 ---
 
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Hugolelis/lexio.git
-cd lexio
-
-# Install dependencies
-pip install -e .
-```
-
----
-
-## Usage
-
-### Basic analysis
+## Demo
 
 ```bash
 lexio analyze sample.txt
 ```
-
-Output includes statistics and a ranked list of the most frequent words:
 
 ```
 ╭───────────────────────╮
@@ -83,6 +61,55 @@ Output includes statistics and a ranked list of the most frequent words:
 │ Hapax Legomena  │    204 │
 │ Dis Legomena    │     47 │
 └─────────────────┴────────┘
+```
+
+---
+
+## Features
+
+| Capability | Description |
+|---|---|
+| **Multi-format** | Analyze `.txt`, `.pdf`, and `.docx` files |
+| **Lexiometric stats** | Total words, unique words, sentences, paragraphs |
+| **Readability metrics** | Type-token ratio, hapax/dis legomena, average word length |
+| **Word frequency** | Rank top words with visual bar charts |
+| **Vocabulary** | List all unique words alphabetically or by frequency |
+| **Word search** | Check exact frequency of any word |
+| **Stopword filtering** | Built-in 300+ stopwords for English and Portuguese |
+| **Custom stopwords** | User-defined word filters via `~/.lexio/stopwords.txt` |
+| **Minimum length** | Filter out short words with `--min-length` |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.11+
+- pip
+
+### Installation
+
+```bash
+git clone https://github.com/Hugolelis/lexio.git
+cd lexio
+pip install -e .
+```
+
+### Verify installation
+
+```bash
+lexio version
+```
+
+---
+
+## Usage
+
+### Basic analysis
+
+```bash
+lexio analyze sample.txt
 ```
 
 ### Top words
@@ -164,7 +191,7 @@ The custom list merges with the built-in 300+ stopwords automatically.
 
 ---
 
-## Architecture
+## Architecture & Design Decisions
 
 ```
 src/
@@ -185,20 +212,23 @@ The pipeline follows a clean separation of concerns:
 2. **Analyzer** — tokenizes, counts, and computes statistical metrics
 3. **CLI** — presents results using Rich tables and panels
 
----
+**Why this shape:** readers are isolated behind a single interface so adding a new format (`.epub`, `.md`) only means implementing one more reader, without touching the analyzer. Typer was chosen for the CLI layer for its type-hint-driven commands and automatic `--help` generation; Rich handles output formatting so the analyzer stays free of any presentation logic.
 
-## Contributing
+**Known limitations:**
+- No lemmatization/stemming — word variants (`run` / `running`) are counted as distinct words, which affects vocabulary and frequency metrics.
+- Stopword filtering only ships English and Portuguese lists; other languages need a fully custom list via `~/.lexio/stopwords.txt`.
+- Large PDFs are parsed synchronously — no progress indicator or streaming for very large files.
 
-Contributions are welcome! To get started:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -am 'Add my feature'`)
-4. Push to the branch (`git push origin feature/my-feature`)
-5. Open a Pull Request
+<!-- Adjust "Why this shape" and "Known limitations" to match your actual reasoning — draft based on the code structure. -->
 
 ---
 
 ## License
 
 Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
+
+---
+
+## Author
+
+**Hugo** — [GitHub](https://github.com/Hugolelis)
