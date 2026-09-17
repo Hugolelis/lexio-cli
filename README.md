@@ -93,6 +93,8 @@ lexio analyze sample.txt
 ```bash
 git clone https://github.com/Hugolelis/lexio.git
 cd lexio
+python -m venv .venv
+source .venv/bin/activate
 pip install -e .
 ```
 
