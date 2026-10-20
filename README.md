@@ -8,7 +8,7 @@
 
 </div>
 
-> **Lexio** is a command-line tool for lexiometric analysis of text documents. It extracts statistical insights from `.txt`, `.pdf`, and `.docx` files — including word frequency, vocabulary richness, and readability metrics — with automatic stopword filtering and configurable analysis parameters.
+> **Lexio** is a command-line tool for lexiometric analysis of text documents. It extracts statistical insights from `.txt`, `.pdf`, and `.docx` files, including word frequency, vocabulary richness, and readability metrics, with automatic stopword filtering and configurable analysis parameters.
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
@@ -30,9 +30,9 @@
 
 ## About
 
-Manually eyeballing a text for word frequency or vocabulary richness doesn't scale past a page. Lexio turns that into a single command across `.txt`, `.pdf`, and `.docx` files, computing the same lexicometric measures linguists use by hand — type-token ratio, hapax/dis legomena, word frequency — with stopword filtering built in so the numbers aren't dominated by "the", "and", "de", "que".
+Manually eyeballing a text for word frequency or vocabulary richness doesn't scale past a page. Lexio turns that into a single command across `.txt`, `.pdf`, and `.docx` files, computing the same lexicometric measures linguists use by hand (type-token ratio, hapax/dis legomena, word frequency) with stopword filtering built in so the numbers aren't dominated by "the", "and", "de", "que".
 
-<!-- Adjust to your actual motivation — draft based on the feature list. -->
+<!-- Adjust to your actual motivation, draft based on the feature list. -->
 
 ---
 
@@ -156,12 +156,12 @@ lexio analyze sample.txt --include-stopwords
 
 | Command | Description | Aliases |
 |---|---|---|
-| `analyze` | Full lexiometric analysis with stats and top words | — |
-| `top-words` | Rank most frequent words | — |
-| `vocabulary` | List all unique words | — |
-| `freq` | Check frequency of a specific word | — |
-| `stopwords` | List all active stopwords | — |
-| `version` | Show version | — |
+| `analyze` | Full lexiometric analysis with stats and top words | - |
+| `top-words` | Rank most frequent words | - |
+| `vocabulary` | List all unique words | - |
+| `freq` | Check frequency of a specific word | - |
+| `stopwords` | List all active stopwords | - |
+| `version` | Show version | - |
 
 ### Global options
 
@@ -210,18 +210,18 @@ src/
 
 The pipeline follows a clean separation of concerns:
 
-1. **Reader** — detects file extension and extracts raw text with paragraph count
-2. **Analyzer** — tokenizes, counts, and computes statistical metrics
-3. **CLI** — presents results using Rich tables and panels
+1. **Reader**: detects file extension and extracts raw text with paragraph count
+2. **Analyzer**: tokenizes, counts, and computes statistical metrics
+3. **CLI**: presents results using Rich tables and panels
 
 **Why this shape:** readers are isolated behind a single interface so adding a new format (`.epub`, `.md`) only means implementing one more reader, without touching the analyzer. Typer was chosen for the CLI layer for its type-hint-driven commands and automatic `--help` generation; Rich handles output formatting so the analyzer stays free of any presentation logic.
 
 **Known limitations:**
-- No lemmatization/stemming — word variants (`run` / `running`) are counted as distinct words, which affects vocabulary and frequency metrics.
+- No lemmatization/stemming: word variants (`run` / `running`) are counted as distinct words, which affects vocabulary and frequency metrics.
 - Stopword filtering only ships English and Portuguese lists; other languages need a fully custom list via `~/.lexio/stopwords.txt`.
-- Large PDFs are parsed synchronously — no progress indicator or streaming for very large files.
+- Large PDFs are parsed synchronously: no progress indicator or streaming for very large files.
 
-<!-- Adjust "Why this shape" and "Known limitations" to match your actual reasoning — draft based on the code structure. -->
+<!-- Adjust "Why this shape" and "Known limitations" to match your actual reasoning, draft based on the code structure. -->
 
 ---
 
@@ -233,4 +233,4 @@ Distributed under the **MIT License**. See [LICENSE](LICENSE) for more informati
 
 ## Author
 
-**Hugo** — [GitHub](https://github.com/Hugolelis)
+[Hugolelis](https://github.com/Hugolelis)
