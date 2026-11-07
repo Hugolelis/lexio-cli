@@ -21,8 +21,8 @@
 - [Commands](#commands)
 - [Configuration](#configuration)
 - [Architecture & Design Decisions](#architecture--design-decisions)
-- [License](#license)
 - [Author](#author)
+- [License](#license)
 
 </details>
 
@@ -225,12 +225,12 @@ The pipeline follows a clean separation of concerns:
 
 ---
 
-## License
-
-Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
-
----
-
 ## Author
 
 [Hugolelis](https://github.com/Hugolelis)
+
+---
+
+## License
+
+Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
